@@ -14,14 +14,72 @@
                 data:{
                     title:'디렉티브 : v-for02 > 객체형 배열 사용',
                     telLists :[
-                        {name:''}
+                        {name:'김선호',tel:'010-1111-1111',age:35},
+                        {name:'김고은',tel:'010-2222-2222',age:30},
+                        {name:'옹성우',tel:'010-3333-3333',age:27},
+                        {name:'김선우',tel:'010-4444-4444',age:20}
+                    ],
+                    gradeLists :[
+                        {name:'김선호',kor:80,eng:70,math:90},
+                        {name:'김고은',kor:80,eng:70,math:90},
+                        {name:'옹성우',kor:80,eng:70,math:90},
+                        {name:'김선우',kor:80,eng:70,math:90}
                     ]
                 }
-            })
-        })
+            });
+        });
     </script>
 </head>
 <body>
-    
+    <div id="app">
+        <h2>{{title}}</h2>
+
+        <h3>전화번호부</h3>
+        <table>
+            <tr>
+                <th>No</th>
+                <th>이름</th>
+                <th>전화번호</th>
+                <th>나이</th>
+            </tr>
+            <tr v-for='(mem, idx) in telLists'>
+                <td>{{idx+1}}</td>
+                <td>{{mem.name}}</td>
+                <td>{{mem.tel}}</td>
+                <td>{{mem.age}}</td>
+            </tr>
+        </table>
+
+        <!-- 
+            연습문제]
+                객체형 배열을 사용하여 다음 조건에 주어진 내용을
+                출력한다.
+            출력]
+                이름, 국어, 영어, 수학, 평점, 평균
+                Model 데이터는 gradeLists를 사용한다
+         -->
+
+         <h3>성적관리</h3>
+         <table>
+            <tr>
+                <th>No</th>
+                <th>이름</th>
+                <th>국어</th>
+                <th>수학</th>
+                <th>영어</th>
+                <th>총점</th>
+                <th>평균</th>
+            </tr>
+            <tr v-for='(gen, idx) in gradeLists'>
+                <td>{{idx+1}}</td>
+                <td>{{gen.name}}</td>
+                <td>{{gen.kor}}</td>
+                <td>{{gen.math}}</td>
+                <td>{{gen.eng}}</td>
+                <td>{{gen.kor+gen.math+gen.eng}}</td>
+                <td>{{Math.round((gen.kor+gen.math+gen.eng)/3)}}</td>
+            </tr>
+         </table>
+    </div>
 </body>
 </html>
