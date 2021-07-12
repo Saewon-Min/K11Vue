@@ -9,6 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    <script>
        $(function(){
+           // 모델 데이터 외부 선언
            var model = {
                title:'computed > 검색 기능 구현하기',
                countryName : "",
@@ -37,8 +38,15 @@
                data:model,
                computed:{
                    filtered : function(){
+                       // 검색을 위해 입력한 국가명
                        var cname = this.countryName;
                        return this.conutries.filter(function(item,index){
+                           /*
+                           모델 데이터 conutries 개수만큼 반복하면서 각 객체를
+                           item으로 반환한다.
+                           반환된 객체의 name과 우리가 입력한 국가명을 비교해서
+                           그 값이 존재할때만 반환한다.
+                           */
                            if(item.name.indexOf(cname)>-1){
                                return true;
                            }
@@ -54,6 +62,10 @@
     <div id="app">
         <h2>{{title}}</h2>
         <div>
+            <!-- 
+                검색을 위해 입력한 국가명은 모델데이터 countryName 에
+                실시간 반영됨
+             -->
             국가명 : <input type="text" v-model='countryName'
                 placeholder="검색할 국가명을 입력하세요">
         </div>
@@ -67,6 +79,12 @@
                 </tr>
             </thead>
             <tbody id="contacts">
+                <!--  
+                    computed속성의 결과로 반환되는 filtered는
+                    여러개의 결과값을 가지고 있으므로, v-for 디렉티브를
+                    이용해서 반복 출력한다.
+                -->
+
                 <tr v-for='c in filtered'>
                     <td>{{c.no}}</td>
                     <td>{{c.name}}</td>
