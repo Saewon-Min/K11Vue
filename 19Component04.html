@@ -7,9 +7,34 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('my-component',{
+            template : '<button v-on:click="showLog">보여주세요</button>',
+            methods :{
+                showLog : function(){
+                    this.$emit('showLog');
+                }
+            }
+        });
 
+        $(function(){
+            new Vue({
+                el:'#app',
+                data:{
+                    message:'상위 컴포넌트의 메세지'
+                },
+                methods:{
+                    printText:function(){
+                        console.log('발생된 이벤트를 받았습니다.');
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-    
+    <div id='app'>
+        <my-component v0-on:show-log='printText'></my-component>
+    </div>
 </body>
 </html>

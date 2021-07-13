@@ -7,9 +7,38 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var eventBus = new Vue();
 
+        Vue.component('your_component',{
+            template:`
+                <div>
+                    하위 컴포넌트입니다.
+                    <button v-on:click="showLog">보여주세요</button>
+                </div>
+                `,
+            methods:{
+                showLog:function(){
+                    eventBus.$emit('vEventBus',100);
+                }
+            },
+        });
+        
+        $(function(){
+            var vue = new Vue({
+                el:'#app',
+                created : function(){
+                    eventBus.$on('vEventBus', function(value){
+                        console.log('이벤트를 전달받음. 전달 받은 값 : ',value);
+                    });
+                }
+            });
+        });
+    </script>
 </head>
 <body>
-    
+    <div id='app'>
+        <your_component></your_component>
+    </div>
 </body>
 </html>
