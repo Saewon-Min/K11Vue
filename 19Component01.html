@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <template id='tmp01'>
+        <div>
+            <h2>즐거운 토요일</h2>
+            <p>나머지 시간 놀자아아아
+                놀자
+                놀자아아아
+                노는게 제일 좋아
+            </p>
+         </div>
+    </template>
+    
+    <script>
+        Vue.component('hello-component',{
+            template:'<div>hello world</div>'
+        });
+        Vue.component('greet',{
+            template:'<h2>안녕하세요</h2>'
+        });
+        Vue.component('comp2',{
+            template:'#tmp01'
+        });
+    
+        $(function(){
+            Vue.config.devtools = true;
+            var v = new Vue({
+                el:'#app',
+                data:{
+                    title:'컴포넌트01'
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id='app'>
+        <h2>{{title}}</h2>
+
+        <hello-component></hello-component>
+        <greet></greet>
+        <comp2></comp2>
+        <hello-component></hello-component>
+        <greet></greet>
+        <comp2></comp2>
+        <hello-component></hello-component>
+
+    </div>
+</body>
+</html>
