@@ -7,14 +7,27 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- 
+        하위에서 상위 컴포넌트로 데이터 전달
+            : 이벤트를 통해 전달한다.
+        $emit / v-on 속성
+            : 이벤트 발생과 수신을 위해 사용된다.
+        이벤트 발생
+            : this.$emit('이벤트명')
+        이벤트 수신
+            : <컴포넌트 v-on:이벤트명='상위컴포너트의 메소드명'></컴포넌트>
+     -->
     <script>
+        // 전역 컴포넌트 선언
         Vue.component('my-component',{
+            // 1. 아래 버튼을 누르면 showLog() 메소드가 호출된다.
             template : '<button v-on:click="showLog">보여주세요</button>',
             methods :{
                 showLog : function(){
-                    this.$emit('showLog');
+                    // 2. 메소드가 호출되면 show-log 이벤트가 발생된다.
+                    this.$emit('show-log');
                 }
-            }
+            },
         });
 
         $(function(){
@@ -34,7 +47,11 @@
 </head>
 <body>
     <div id='app'>
-        <my-component v0-on:show-log='printText'></my-component>
+        <h2>{{message}}</h2>
+        <!-- 
+            3. show-log 이벤트를 v-on이 핸들링해서 printText()를 호출한다.
+         -->
+        <my-component v-on:show-log='printText'></my-component>
     </div>
 </body>
 </html>
