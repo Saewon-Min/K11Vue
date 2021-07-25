@@ -7,8 +7,80 @@
     <title>Document</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        $(function(){
+            var vue = new Vue({
+                el:'#app',
+                data : {
+                    title:'이벤트 처리와 methods',
+                    amount:0,
+                    balance:0
+                },
+                methods : {
+                    deposit : function(){
+                        var amt = parseInt(this.amount);
+                        if(amt<=0){
+                            alert('0보다 큰 값을 예금해야 합니다.');
+                        }else{
+                            this.balance += amt;
+                        }
+                    },
+                    withdraw : function(){
+                        var amt = parseInt(this.amount);
+                        if(amt<=0){
+                            alert('0보다 큰 값을 인출할 수 있습니다.')
+                        }else if (amt>this.balance){
+                            alert('잔고보다 많은 금액을 인출할 수 없습니다.');
+                        }else{
+                            this.balance -= amt;
+                        }
+                    }
+                },
+                computed :{
+                    test:function(){
+                        console.log('computed 테스트입니다.');
+                        return this.amount;
+                    }
+                }
+            });
+        });
+
+
+    </script>
 </head>
 <body>
-    
+    <div id="app">
+
+        <h2>{{title}}</h2>
+        <p>
+            금액 입력 : <input type="text" v-model="amount">
+        </p>
+        <!-- 
+            methods 속성의 각 함수를 호출할때는 소괄호 부분은
+            생략 가능하다.
+            하지만 {{}} 에서는 소괄호 부분을 명시해줘야 한다.
+         -->
+        <p>
+            <button type="button" @click='deposit()'>예금</button>
+            <button type="button" v-on:click='withdraw()'>출금</button>
+        </p>
+
+        <h3>현재 잔고 : {{balance}}</h3>
+
+        <!-- 
+            이벤트에서는 methods(함수)만 호출할 수 있다.
+            computed는 호출할 수 없다.
+
+            때문에 computed인 test를 기술하였기때문에 에러가 발생한다.
+         -->
+        <h3>computed + 이벤트</h3>
+
+        <p>
+            <button type="button" v-on:click='test'>computed 테스트</button></button>
+        </p>
+
+
+    </div>
 </body>
 </html>
